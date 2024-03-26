@@ -1,0 +1,29 @@
+============================================
+Steps to create Google OAuth Credentials : 
+============================================
+- Create a Google Account
+- open google cloud console - https://cloud.google.com/cloud-console in browser
+- Open sideNav bar and Select Apis & Services -> OAuth Consent screen
+- Click on Create Project button on the top right
+- Enter Project name and Organisation(optional) -> Create
+- Select External -> Create
+- Enter App name and User support email
+- Enter Developer Email address -> save and continue
+- Add test user under Test Users tab
+- Click on Back to dashboard
+Create Credentials : 
+----------------------
+
+- Click on Create Credentials -> O Auth Client ID
+- Application Type -> Web Application
+- Enter name
+- Authorized Domain - need to give frontend domain url, when we are authentication from frontend
+- Authorized redirect url's - Give the redirect urls(to the page where you need to redirect after authenticated) 
+- Create
+- We will see a popup of following details : 
+ -> Client ID (SOCIAL_AUTH_GOOGLE_OAUTH2_KEY)
+ -> Client Secret (SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET)
+
+These credentials will be used to authenticate google. 
+
+
