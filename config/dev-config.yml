@@ -1,0 +1,16 @@
+data:
+  aws_credentials:
+    ACCESS_KEY_ID:
+      - AKIAQREMEI3P6FAX67SB
+    SECRET_ACCESS_KEY:
+      - 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
+    REGION:
+      - ap-south-1
+    SECRET_KEY:
+      - Sotr07eb7iph1R+tAdOy
+    NODE_ENV:
+      - development
+    ACCOUNT_NUMBER:
+      - 036801103583
+    BUCKET_NAME:
+      - dev-rhibhus-server

@@ -1,0 +1,18 @@
+deployment:
+  vpc:
+    subnets:
+      - subnet-00fc7af9d5f5aaf84
+      - subnet-04ef111d1e85123c5
+      - subnet-0e7c0c3cf566d73ce
+    securityGroups:
+      - sg-0d2761d4e2ea0169d
+data:
+  url:
+    bucketUrl:
+      - https://uat-rhibhus.s3.ap-south-1.amazonaws.com
+  name:
+    bucketName:
+      - uat-rhibhus-server
+  account:
+    accountNumber:
+      - 036801103583
