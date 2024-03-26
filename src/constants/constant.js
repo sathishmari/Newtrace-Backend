@@ -196,7 +196,16 @@ exports.keyWords = {
 
     DESCRIPTION: "description",
     PROTOTYPE_NAME: "prototype name",
+    DEFAULT_VERSION: "Version 1",
 }
 exports.validNames = {
     INDUSTRY: "Industry",
+}
+
+exports.prototypeStatus = {
+    PLANNED: "Planned",
+    DESIGN: "Design",
+    MANUFACTURING: "Manufacturing",
+    TESTING: "Testing",
+    ARCHIVED: "Archived"
 }
