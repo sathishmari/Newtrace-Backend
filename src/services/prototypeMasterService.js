@@ -1,11 +1,9 @@
-const bcrypt = require('bcryptjs');
 
 const { prototypeMasterRepository } = require('../repository');
 let { baseService } = require("./genericService");
-const { constant: { Messages, emailTemplatePaths } } = require('../constants');
+const { constant: { Messages } } = require('../constants');
 const { util: { isEmptyArray, makeLcWithoutSpace, getCurrentTimestamp, formatErrorResponse, formatResponse, isEmptyObject, ERROR, getRandomOtp }, jwt } = require('../helper');
-const emailService = require("./emailService");
-const blobService = require('./blobService');
+const prototypeVersionService = require('./prototypeVersionService');
 
 baseService = baseService(prototypeMasterRepository);
 
@@ -26,6 +24,7 @@ const addPrototypeMaster = async (request) => {
         };
 
         let newUser = await prototypeMasterRepository.create(data);
+        let defaultVersion = await prototypeVersionService.addVersionByDefault(newUser);
         return newUser
     }
 }
