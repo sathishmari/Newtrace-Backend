@@ -13,6 +13,7 @@
     "@azure/cosmos": "^4.0.0",
     "@azure/functions": "^4.3.0",
     "@azure/storage-blob": "^12.17.0",
+    "agent-base": "^7.1.0",
     "axios": "^1.6.7",
     "azure-functions-core-tools": "^4.0.5530",
     "bcryptjs": "^2.4.3",
