@@ -5,10 +5,10 @@ const { util: { isEmptyArray, makeLcWithoutSpace, getCurrentTimestamp, formatErr
 
 baseService = baseService(prototypeVersionRepository);
 
-const addVersionByDefault = async (request) => {
+    const addVersion = async (request) => {
     const data = {
         prototypeId: request.id,
-        versionName: keyWords.DEFAULT_VERSION,
+        versionName: !!request.versionName ? request.versionName : keyWords.DEFAULT_VERSION,
         versionStatus: prototypeStatus.DESIGN,
         createdTs: await getCurrentTimestamp(),
         updatedTs: await getCurrentTimestamp(),
@@ -18,8 +18,24 @@ const addVersionByDefault = async (request) => {
     return defaultVersion;
 }
 
+const getVersionById = async (request) => {
+    console.log("======================",request.id);
+
+    let VersionData = await prototypeVersionRepository.getById(request.id);
+    return VersionData;
+
+}
+
+const updateVersionById = async (request) => {
+
+    let defaultVersion = await prototypeVersionRepository.update(request);
+    return defaultVersion;
+}
+
 module.exports = {
     ...baseService,
 
-    addVersionByDefault
+    addVersion,
+    getVersionById,
+    updateVersionById
 }
