@@ -1,5 +1,5 @@
 
-const { prototypeMasterRepository } = require('../repository');
+const { prototypeMasterRepository, prototypeVersionRepository } = require('../repository');
 let { baseService } = require("./genericService");
 const { constant: { Messages } } = require('../constants');
 const { util: { isEmptyArray, makeLcWithoutSpace, getCurrentTimestamp, formatErrorResponse, formatResponse, isEmptyObject, ERROR, getRandomOtp }, jwt } = require('../helper');
@@ -29,8 +29,23 @@ const addPrototypeMaster = async (request) => {
     }
 }
 
+const fetchPrototypeDetails = async (request) => {
+    let allPrototype = await prototypeMasterRepository.getAll();
+    if (!isEmptyArray(allPrototype)) {
+        let prototypeDetails = await Promise.all(allPrototype.map(async (prototype) => {
+            prototype.versions = await prototypeVersionRepository.getByObject({ prototypeId: prototype.id });
+            return prototype;
+        }))
+        return prototypeDetails;
+    } else {
+        return [];
+    }
+
+}
+
 module.exports = {
     ...baseService,
 
-    addPrototypeMaster
+    addPrototypeMaster,
+    fetchPrototypeDetails
 }
