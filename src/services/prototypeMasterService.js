@@ -24,7 +24,7 @@ const addPrototypeMaster = async (request) => {
         };
 
         let newUser = await prototypeMasterRepository.create(data);
-        let defaultVersion = await prototypeVersionService.addVersionByDefault(newUser);
+        let defaultVersion = await prototypeVersionService.addVersion(newUser);
         return newUser
     }
 }
