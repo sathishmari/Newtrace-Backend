@@ -10,6 +10,7 @@ const otpForResetPassword = require('./otpForResetPassword.validator')
 const resetPassword = require('./resetPassword.validator');
 const userLogin = require('./userLogin.validator');
 const userRegister = require('./userRegister.validator');
+const addEcDetails = require('./addEcDetails.validator');
 
 const addPrototypeMaster = require('./addPrototypeMaster.validator');
 
@@ -29,4 +30,5 @@ module.exports = {
     userRegister,
     
     addPrototypeMaster,
+    addEcDetails
 }

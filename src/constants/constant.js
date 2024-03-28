@@ -196,6 +196,7 @@ exports.keyWords = {
 
     DESCRIPTION: "description",
     PROTOTYPE_NAME: "prototype name",
+    EcDetail_NAME: "Ec name",
     DEFAULT_VERSION: "Version 1",
 }
 exports.validNames = {

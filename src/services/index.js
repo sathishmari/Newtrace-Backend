@@ -3,11 +3,14 @@ const emailService = require('./emailService')
 const userService = require('./userService')
 const prototypeMasterService = require('./prototypeMasterService')
 const prototypeVersionService = require('./prototypeVersionService');
+const ecService = require('./ecService');
+
 
 module.exports = {
     blobService, 
     emailService,
     userService,
     prototypeMasterService,
-    prototypeVersionService
+    prototypeVersionService,
+    ecService
 }
