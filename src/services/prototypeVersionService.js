@@ -13,7 +13,8 @@ baseService = baseService(prototypeVersionRepository);
         createdTs: await getCurrentTimestamp(),
         updatedTs: await getCurrentTimestamp(),
     };
-
+    console.log("----------------------------------------------------------------------------------------");
+    console.log({firsttt:request})
     let defaultVersion = await prototypeVersionRepository.create(data);
     return defaultVersion;
 }
