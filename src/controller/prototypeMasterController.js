@@ -20,8 +20,25 @@ const addPrototypeMaster = async (request, context) => {
     }
 };
 
+const fetchPrototypeDetails = async (request, context) => {
+    let { status, body } = await preInvoke(null, null, request, context);
+    if (status !== ERROR.OK) {
+        return formatErrorResponse(status, body)
+    }
+    try {
+        let result = await prototypeMasterService.fetchPrototypeDetails(body);
+        return formatResponse(result);
+    } catch (error) {
+        console.log({ error });
+        return formatErrorResponse(error.body, error.status)
+    }
+};
+
+
+
 module.exports = {
     ...baseController,
-    
-    addPrototypeMaster
+
+    addPrototypeMaster,
+    fetchPrototypeDetails
 }

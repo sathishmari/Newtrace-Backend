@@ -13,6 +13,9 @@ const userRegister = require('./userRegister.validator');
 const addEcDetails = require('./addEcDetails.validator');
 
 const addPrototypeMaster = require('./addPrototypeMaster.validator');
+const addVersion = require('./addVersion.validator');
+const fetchVersion = require('./fetchVersion.validator')
+const updateVersion = require('./updateVersion.validator');
 
 module.exports = {
 
@@ -30,5 +33,9 @@ module.exports = {
     userRegister,
     
     addPrototypeMaster,
-    addEcDetails
+    addVersion,
+    addEcDetails,
+    fetchVersion,
+    updateVersion,
+
 }

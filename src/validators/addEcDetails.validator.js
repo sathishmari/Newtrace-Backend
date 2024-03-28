@@ -2,7 +2,8 @@ const Joi = require('joi');
 const { keyWords } = require('../constants/constant');
 
 const addEcDetailsSchema = Joi.object({
-    name: Joi.string().required().label(keyWords.EcDetail_NAME),
+    EC_name: Joi.string().required().label(keyWords.ECDETAIL_NAME),
+    remarks : Joi.string()
 });
 
 module.exports = addEcDetailsSchema;
