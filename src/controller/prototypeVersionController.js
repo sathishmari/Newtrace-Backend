@@ -7,7 +7,7 @@ const { constant: { Roles } } = require("../constants");
 const { preMiddleware: { preInvoke } } = require("../middleware");
 
 const addVersion = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'addVersion', request, context);
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }

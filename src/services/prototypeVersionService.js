@@ -23,18 +23,20 @@ const addVersionByDefault = async (request) => {
 }
 
 const addVersion = async (request) => {
+    console.log("----------------",request)
     try {
-        const data = {
-            prototypeId: request.prototypeId,
-            versionName: !!request.versionName ? request.versionName : keyWords.DEFAULT_VERSION,
-            versionStatus: prototypeStatus.DESIGN,
-            createdTs: await getCurrentTimestamp(),
-            updatedTs: await getCurrentTimestamp(),
-        };
+        // const data = {
+        //     prototypeId: request.prototypeId,
+        //     versionName: !!request.versionName ? request.versionName : keyWords.DEFAULT_VERSION,
+        //     versionStatus: prototypeStatus.DESIGN,
+        //     createdTs: await getCurrentTimestamp(),
+        //     updatedTs: await getCurrentTimestamp(),
+        // };
         let oldVersion = await prototypeVersionRepository.getByVersionName(request.versionName, request.prototypeId);
 
         if (isEmptyArray(oldVersion)) {
-            let defaultVersion = await prototypeVersionRepository.create(data);
+            // let defaultVersion = await prototypeVersionRepository.create(data);
+            let defaultVersion = await prototypeVersionRepository.create({...request, createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp(),});
             return defaultVersion;
         }
         else {

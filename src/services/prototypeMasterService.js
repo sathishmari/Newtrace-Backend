@@ -14,7 +14,8 @@ const addPrototypeMaster = async (request) => {
         throw new Error(`${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`);
     } else {
         const data = {
-            ...request,
+            prototypeName : request.prototypeName,
+            description : request.description,
             lcPrototypeName: await makeLcWithoutSpace(request.prototypeName),
             createdBy: null,
             updatedBy: null,
@@ -24,7 +25,16 @@ const addPrototypeMaster = async (request) => {
         };
 
         let newUser = await prototypeMasterRepository.create(data);
-        let defaultVersion = await prototypeVersionService.addVersionByDefault(newUser);
+
+        const  versionData = {
+            prototypeId : request.prototypeName,
+            projectedDesignCompletionDate : request.projectedDesignCompletionDate ,
+            projectedAssemblyCompletionDate : request.projectedAssemblyCompletionDate,
+            ProjectedTestingCompletionDate :request.ProjectedTestingCompletionDate ,
+            createdTs: await getCurrentTimestamp(),
+            updatedTs: await getCurrentTimestamp(),
+        }
+        let defaultVersion = await prototypeVersionService.addVersionByDefault(versionData);
         console.log("defaultVersion------------",defaultVersion);
         return newUser
     }
