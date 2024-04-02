@@ -6,13 +6,14 @@ const { util: { formatErrorResponse, formatResponse } } = require('../helper');
 const { constant: { Roles } } = require("../constants");
 const { preMiddleware: { preInvoke } } = require("../middleware");
 
-const addVersionByDefault = async (request, context) => {
-    let { status, body } = await preInvoke(null, null, request, context);
+const addVersion = async (request, context) => {
+    let { status, body } = await preInvoke(null, 'addVersion', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
+
     try {
-        let result = await prototypeVersionService.addVersionByDefault(body);
+        let result = await prototypeVersionService.addVersion(body);
         return formatResponse(result);
     } catch (error) {
         console.log({ error });
@@ -20,13 +21,14 @@ const addVersionByDefault = async (request, context) => {
     }
 };
 
-const updateVersionDetails = async (request, context) => {
-    let { status, body } = await preInvoke(null, null, request, context);
+const getVersionById = async (request, context) => {
+    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
+
     try {
-        let result = await prototypeVersionService.updateVersionDetails(body);
+        let result = await prototypeVersionService.getVersionById(body);
         return formatResponse(result);
     } catch (error) {
         console.log({ error });
@@ -34,11 +36,27 @@ const updateVersionDetails = async (request, context) => {
     }
 };
 
+
+const updateVersionById = async (request, context) => {
+    let { status, body } = await preInvoke(null, 'updateVersion', request, context);
+    if (status !== ERROR.OK) {
+        return formatErrorResponse(status, body)
+    }
+
+    try {
+        let result = await prototypeVersionService.updateVersionById(body);
+        return formatResponse(result);
+    } catch (error) {
+        console.log({ error });
+        return formatErrorResponse(error.body, error.status)
+    }
+};
 
 
 module.exports = {
     ...baseController,
 
-    addVersionByDefault,
-    updateVersionDetails
+    addVersion,
+    getVersionById,
+    updateVersionById
 }

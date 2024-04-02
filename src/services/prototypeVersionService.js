@@ -6,19 +6,51 @@ const { util: { isEmptyArray, makeLcWithoutSpace, getCurrentTimestamp, formatErr
 baseService = baseService(prototypeVersionRepository);
 
 const addVersionByDefault = async (request) => {
-    const data = {
-        prototypeId: request.id,
-        versionName: keyWords.DEFAULT_VERSION,
-        versionStatus: prototypeStatus.DESIGN,
-        createdTs: await getCurrentTimestamp(),
-        updatedTs: await getCurrentTimestamp(),
-    };
+    try {
+        const data = {
+            prototypeId: request.prototypeId,
+            versionName: keyWords.DEFAULT_VERSION,
+            versionStatus: prototypeStatus.DESIGN,
+            createdTs: await getCurrentTimestamp(),
+            updatedTs: await getCurrentTimestamp(),
+        };
 
-    let defaultVersion = await prototypeVersionRepository.create(data);
-    return defaultVersion;
+        let defaultVersion = await prototypeVersionRepository.create(data);
+        return defaultVersion;
+    } catch (error) {
+        console.log(formatErrorResponse(error));
+    }
 }
 
-const updateVersionDetails = async (request) => {
+const addVersion = async (request) => {
+    try {
+        const data = {
+            prototypeId: request.prototypeId,
+            versionName: !!request.versionName ? request.versionName : keyWords.DEFAULT_VERSION,
+            versionStatus: prototypeStatus.DESIGN,
+            createdTs: await getCurrentTimestamp(),
+            updatedTs: await getCurrentTimestamp(),
+        };
+        let oldVersion = await prototypeVersionRepository.getByVersionName(request.versionName, request.prototypeId);
+
+        if (isEmptyArray(oldVersion)) {
+            let defaultVersion = await prototypeVersionRepository.create(data);
+            return defaultVersion;
+        }
+        else {
+            return formatErrorResponse("VersionName already exist", 500);
+        }
+    } catch (error) {
+        console.log(formatErrorResponse(error));
+    }
+}
+
+const getVersionById = async (request) => {
+    let VersionData = await prototypeVersionRepository.getById(request.id);
+    return VersionData;
+}
+
+const updateVersionById = async (request) => {
     const { id, ...value } = request;
     const versionDetails = await prototypeVersionRepository.getById(id);
     if (!isEmptyObject(versionDetails)) {
@@ -32,6 +64,8 @@ const updateVersionDetails = async (request) => {
 module.exports = {
     ...baseService,
 
+    addVersion,
     addVersionByDefault,
-    updateVersionDetails
+    getVersionById,
+    updateVersionById
 }
