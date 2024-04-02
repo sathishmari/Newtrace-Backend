@@ -25,7 +25,7 @@ const addPrototypeMaster = async (request) => {
 
         let newUser = await prototypeMasterRepository.create(data);
         let defaultVersion = await prototypeVersionService.addVersionByDefault(newUser);
-        console.log("defaultVersion------------",defaultVersion);
+        console.log("defaultVersion------------", defaultVersion);
         return newUser
     }
 }
@@ -41,12 +41,23 @@ const fetchPrototypeDetails = async (request) => {
     } else {
         return [];
     }
+}
 
+const updatePrototypeDetails = async (request) => {
+    const { id } = request;
+    const dbPrototypeDetail = await prototypeMasterRepository.getById(id);
+    if (!isEmptyObject(dbPrototypeDetail)) {
+        const prototypeDetails = await prototypeMasterRepository.update({ ...dbPrototypeDetail, ...request });
+        return prototypeDetails;
+    } else {
+        throw formatErrorResponse("Prototype is not found");
+    }
 }
 
 module.exports = {
     ...baseService,
 
     addPrototypeMaster,
-    fetchPrototypeDetails
+    fetchPrototypeDetails,
+    updatePrototypeDetails
 }
