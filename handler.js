@@ -15,8 +15,6 @@ app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], auth
 
 app.http('updateVersionById', { route: 'v1/updateVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionById });
 
-app.http("fetchPrototypeDetails", { route: 'v1/fetchPrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.fetchPrototypeDetails });
-
 app.http("updateVersionDetails", { route: 'v1/updateVersionDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionDetails });
 
 app.http("getVersionById", { route: 'v1/getVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.getById });

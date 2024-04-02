@@ -36,9 +36,8 @@ const getVersionById = async (request, context) => {
     }
 };
 
-
 const updateVersionById = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'updateVersion', request, context);
+    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
@@ -51,7 +50,6 @@ const updateVersionById = async (request, context) => {
         return formatErrorResponse(error.body, error.status)
     }
 };
-
 
 module.exports = {
     ...baseController,
