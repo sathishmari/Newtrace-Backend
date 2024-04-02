@@ -1,6 +1,7 @@
 const { app } = require('@azure/functions');
 const { prototypeMasterController, userController, blobController, authController, prototypeVersionController } = require('./src/controller');
 const { util: { ERROR } } = require('./src/helper');
+const ecController = require('./src/controller/ecController');
 
 app.http('welcome', { route: 'v1/welcome', methods: ['GET'], authLevel: 'anonymous', handler: () => ({ status: ERROR.OK, body: "Welcome Rhibhus Infosystems!!!" }) });
 
@@ -15,6 +16,11 @@ app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], auth
 app.http('updateVersionById', { route: 'v1/updateVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionById });
 
 app.http("fetchPrototypeDetails", { route: 'v1/fetchPrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.fetchPrototypeDetails });
+
+app.http("addEcDetails", { route: 'v1/addEcDetails', methods: ['POST'], authLevel: 'anonymous', handler: ecController.addEcDetails });
+
+app.http("fetchEcDetails", { route: 'v1/fetchEcDetails', methods: ['POST'], authLevel: 'anonymous', handler: ecController.fetchEcDetails });
+
 
 // app.http("fetchUserById", { route: 'v1/fetchUserById', methods: ['POST'], authLevel: 'anonymous', handler: userController.fetchUserById })
 
