@@ -11,7 +11,7 @@ const addVersion = async (request, context) => {
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
-    
+
     try {
         let result = await prototypeVersionService.addVersion(body);
         return formatResponse(result);
@@ -26,7 +26,7 @@ const getVersionById = async (request, context) => {
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
-    
+
     try {
         let result = await prototypeVersionService.getVersionById(body);
         return formatResponse(result);
@@ -36,13 +36,12 @@ const getVersionById = async (request, context) => {
     }
 };
 
-
 const updateVersionById = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'updateVersion', request, context);
+    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
-    
+
     try {
         let result = await prototypeVersionService.updateVersionById(body);
         return formatResponse(result);
@@ -51,7 +50,6 @@ const updateVersionById = async (request, context) => {
         return formatErrorResponse(error.body, error.status)
     }
 };
-
 
 module.exports = {
     ...baseController,

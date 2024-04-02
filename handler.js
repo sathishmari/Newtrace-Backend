@@ -1,19 +1,17 @@
 const { app } = require('@azure/functions');
 const { prototypeMasterController, userController, blobController, authController, prototypeVersionController } = require('./src/controller');
 const { util: { ERROR } } = require('./src/helper');
-const { addVersion } = require('./src/validators');
-const { prototypeVersionRepository } = require('./src/repository');
 const ecController = require('./src/controller/ecController');
 
 app.http('welcome', { route: 'v1/welcome', methods: ['GET'], authLevel: 'anonymous', handler: () => ({ status: ERROR.OK, body: "Welcome Rhibhus Infosystems!!!" }) });
 
 app.http("addPrototypeMaster", { route: 'v1/addPrototypeMaster', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.addPrototypeMaster });
 
-app.http("addVersion", { route: 'v1/addVersion', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.addVersion});
+app.http("addVersion", { route: 'v1/addVersion', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.addVersion });
 
-app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.getVersionById  });
+app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.getVersionById });
 
-app.http('updateVersionById', { route: 'v1/updateVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionById  });
+app.http('updateVersionById', { route: 'v1/updateVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionById });
 
 app.http("fetchPrototypeDetails", { route: 'v1/fetchPrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.fetchPrototypeDetails });
 

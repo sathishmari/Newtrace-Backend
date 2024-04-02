@@ -24,7 +24,7 @@ const googleSignInforMobileRedirect = async (request, context) => {
 
     try {
         let socialSignInRedirectGoogleMobile_res = await authServices.googleSignInforMobileRedirect(reqBody, context);
-        
+
         let response = JSON.stringify(socialSignInRedirectGoogleMobile_res[0].response);
 
         if (socialSignInRedirectGoogleMobile_res[0].redirect === true) {
@@ -127,8 +127,8 @@ const googleSignInforWebRedirect = async (request, context) => {
 module.exports = {
 
     googleSignInforMobile,
-    googleSignInforMobileRedirect, 
-    googleSignInforWeb, 
-    googleSignInforWebRedirect 
+    googleSignInforMobileRedirect,
+    googleSignInforWeb,
+    googleSignInforWebRedirect
 
 }
