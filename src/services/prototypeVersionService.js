@@ -36,7 +36,7 @@ const addVersion = async (request) => {
 
         if (isEmptyArray(oldVersion)) {
             // let defaultVersion = await prototypeVersionRepository.create(data);
-            let defaultVersion = await prototypeVersionRepository.create({...request, createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp(),});
+            let defaultVersion = await prototypeVersionRepository.create({...request,  prototypeId : "ve", createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp(),});
             return defaultVersion;
         }
         else {
