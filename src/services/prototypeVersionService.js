@@ -18,8 +18,20 @@ const addVersionByDefault = async (request) => {
     return defaultVersion;
 }
 
+const updateVersionDetails = async (request) => {
+    const { id, ...value } = request;
+    const versionDetails = await prototypeVersionRepository.getById(id);
+    if (!isEmptyObject(versionDetails)) {
+        const updateVersion = await prototypeVersionRepository.update({ id: id, ...value });
+        return updateVersion;
+    } else {
+        throw formatErrorResponse("Data was not Found!!");
+    }
+}
+
 module.exports = {
     ...baseService,
 
-    addVersionByDefault
+    addVersionByDefault,
+    updateVersionDetails
 }
