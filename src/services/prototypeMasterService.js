@@ -48,19 +48,31 @@ const fetchPrototypeDetails = async (request) => {
     let allPrototype = await prototypeMasterRepository.getAll();
     if (!isEmptyArray(allPrototype)) {
         let prototypeDetails = await Promise.all(allPrototype.map(async (prototype) => {
-            prototype.versions = await prototypeVersionRepository.getByObject({ prototypeId: prototype.id });
-            return prototype;
+            const versions = await prototypeVersionRepository.getByObject({ prototypeId: prototype.id });
+            prototype.versions = versions.length > 1 ? versions.sort((a, b) => b._ts - a._ts) : versions;
+            return prototype.length > 1 ? prototype.sort((a, b) => b._ts - a._ts) : prototype;
         }))
         return prototypeDetails;
     } else {
         return [];
     }
+}
 
+const updatePrototypeDetails = async (request) => {
+    const { id } = request;
+    const dbPrototypeDetail = await prototypeMasterRepository.getById(id);
+    if (!isEmptyObject(dbPrototypeDetail)) {
+        const prototypeDetails = await prototypeMasterRepository.update({ ...dbPrototypeDetail, ...request });
+        return prototypeDetails;
+    } else {
+        throw formatErrorResponse("Prototype is not found");
+    }
 }
 
 module.exports = {
     ...baseService,
 
     addPrototypeMaster,
-    fetchPrototypeDetails
+    fetchPrototypeDetails,
+    updatePrototypeDetails
 }

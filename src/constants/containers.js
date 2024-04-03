@@ -7,5 +7,6 @@ let DBNamePrefix = `${DBEnvPrefix}newtrace_`;
 exports.CONTAINER_NAMES = {
     PROTOTYPE_MASTER: `${DBNamePrefix}prototype_master`,
     PROTOTYPE_VERSION: `${DBNamePrefix}prototype_version`,
-    EC_DETAILS: `${DBNamePrefix}ec_details`
+    EC_DETAILS: `${DBNamePrefix}ec_details`,
+    MANUFACTURING_DETAILS: `${DBNamePrefix}manufacturing_details`
 }

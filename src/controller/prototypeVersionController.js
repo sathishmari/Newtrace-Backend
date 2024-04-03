@@ -37,7 +37,7 @@ const getVersionById = async (request, context) => {
 };
 
 const updateVersionById = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }

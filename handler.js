@@ -7,6 +7,8 @@ app.http('welcome', { route: 'v1/welcome', methods: ['GET'], authLevel: 'anonymo
 
 app.http("addPrototypeMaster", { route: 'v1/addPrototypeMaster', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.addPrototypeMaster });
 
+app.http("updatePrototypeDetails", { route: 'v1/updatePrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.updatePrototypeDetails });
+
 app.http("addVersion", { route: 'v1/addVersion', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.addVersion});
 
 app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.getVersionById  });

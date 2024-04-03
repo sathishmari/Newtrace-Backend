@@ -4,12 +4,14 @@ const commonController = require('./commonController')
 const userController = require('./userController')
 const prototypeMasterController = require('./prototypeMasterController')
 const prototypeVersionController = require('./prototypeVersionController')
+const manufacturingController = require('./manufacturingController')
 
 module.exports = {
-    authController, 
-    blobController, 
+    authController,
+    blobController,
     commonController,
     userController,
     prototypeMasterController,
-    prototypeVersionController
+    prototypeVersionController,
+    manufacturingController
 }
