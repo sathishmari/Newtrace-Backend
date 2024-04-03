@@ -11,7 +11,8 @@ const addPrototypeMaster = async (request) => {
     let prototypeMaster = await prototypeMasterRepository.getByLcPrototypeName(request.prototypeName);
     console.log("prototypeMaster : ", prototypeMaster);
     if (!isEmptyArray(prototypeMaster)) {
-        throw new Error(`${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`);
+        // throw new Error(`${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`);
+        throw formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS, ERROR.UNAUTHORIZED)
     } else {
         const data = {
             ...request,
