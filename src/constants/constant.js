@@ -62,7 +62,8 @@ exports.Messages = {
     PDF_CREATE_ERROR: "Error in Pdf creation!",
 
     PROTOTYPE_MASTER : {
-        PROTOTYPE_ALREADY_EXISTS: "Prototype name already exists!"
+        PROTOTYPE_ALREADY_EXISTS: "Prototype name already exists!",
+        VERSION_ALREADY_EXISTS: "version ID already exists!"
     }
 }
 
@@ -200,6 +201,9 @@ exports.keyWords = {
     VERSION_ID: "Version ID",
     ECDETAIL_NAME: "Ec name",
     DEFAULT_VERSION: "Version 1",
+    projectedDesignCompletionDate : "projectedDesignCompletionDate",
+    projectedAssemblyCompletionDate : "projectedAssemblyCompletionDate" ,
+    ProjectedTestingCompletionDate : "ProjectedTestingCompletionDate",
 }
 exports.validNames = {
     INDUSTRY: "Industry",
