@@ -2,10 +2,12 @@ const userRepository = require('./userRepository');
 const emailRepository = require('./emailRepository');
 const prototypeMasterRepository = require('./prototypeMasterRepository');
 const prototypeVersionRepository = require('./prototypeVersionRepository');
+const manufacturingRepository = require('./manufacturingRepository');
 
 module.exports = {
-    userRepository, 
+    userRepository,
     emailRepository,
     prototypeMasterRepository,
-    prototypeVersionRepository
+    prototypeVersionRepository,
+    manufacturingRepository
 }
