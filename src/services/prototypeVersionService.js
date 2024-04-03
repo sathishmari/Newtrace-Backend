@@ -32,7 +32,7 @@ const addVersion = async (request) => {
         //     createdTs: await getCurrentTimestamp(),
         //     updatedTs: await getCurrentTimestamp(),
         // };
-        let oldVersion = await prototypeVersionRepository.getByVersionName(request.versionName, request.prototypeId);
+        let oldVersion = await prototypeVersionRepository.getByVersionName(request.versionName, "ve");
 
         if (isEmptyArray(oldVersion)) {
             // let defaultVersion = await prototypeVersionRepository.create(data);
@@ -40,7 +40,8 @@ const addVersion = async (request) => {
             return defaultVersion;
         }
         else {
-            return formatErrorResponse("VersionName already exist", 500);
+        // return { status: `${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, body: request }
+            return formatErrorResponse(Messages.PROTOTYPE_MASTER.VERSION_ALREADY_EXISTS, ERROR.UNAUTHORIZED);
         }
     } catch (error) {
         console.log(formatErrorResponse(error));
