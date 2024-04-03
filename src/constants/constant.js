@@ -201,6 +201,9 @@ exports.keyWords = {
     VERSION_ID: "Version ID",
     ECDETAIL_NAME: "Ec name",
     DEFAULT_VERSION: "Version 1",
+    projectedDesignCompletionDate : "projectedDesignCompletionDate",
+    projectedAssemblyCompletionDate : "projectedAssemblyCompletionDate" ,
+    ProjectedTestingCompletionDate : "ProjectedTestingCompletionDate",
 }
 exports.validNames = {
     INDUSTRY: "Industry",
