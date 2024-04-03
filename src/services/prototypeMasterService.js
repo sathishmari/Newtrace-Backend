@@ -11,10 +11,15 @@ const addPrototypeMaster = async (request) => {
     let prototypeMaster = await prototypeMasterRepository.getByLcPrototypeName(request.prototypeName);
     console.log("prototypeMaster : ", prototypeMaster);
     if (!isEmptyArray(prototypeMaster)) {
-        throw new Error(`${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`);
+        // return {status : Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS,code  : 401 };
+        return formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS, ERROR.UNAUTHORIZED)
+        // throw new Error(`${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, ERROR.UNAUTHORIZED);
+        // return formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS ,  ERROR.UNAUTHORIZED);
+        // return { status: `${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, body: request }
     } else {
         const data = {
-            ...request,
+            prototypeName : request.prototypeName,
+            description : request.description,
             lcPrototypeName: await makeLcWithoutSpace(request.prototypeName),
             createdBy: null,
             updatedBy: null,
@@ -24,8 +29,17 @@ const addPrototypeMaster = async (request) => {
         };
 
         let newUser = await prototypeMasterRepository.create(data);
-        let defaultVersion = await prototypeVersionService.addVersionByDefault(newUser);
-        console.log("defaultVersion------------", defaultVersion);
+
+        const  versionData = {
+            prototypeId : request.prototypeName,
+            projectedDesignCompletionDate : request.projectedDesignCompletionDate ,
+            projectedAssemblyCompletionDate : request.projectedAssemblyCompletionDate,
+            ProjectedTestingCompletionDate :request.ProjectedTestingCompletionDate ,
+            createdTs: await getCurrentTimestamp(),
+            updatedTs: await getCurrentTimestamp(),
+        }
+        let defaultVersion = await prototypeVersionService.addVersionByDefault(versionData);
+        console.log("defaultVersion------------",defaultVersion);
         return newUser
     }
 }
