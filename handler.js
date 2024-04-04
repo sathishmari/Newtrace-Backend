@@ -9,11 +9,11 @@ app.http("addPrototypeMaster", { route: 'v1/addPrototypeMaster', methods: ['POST
 
 app.http("updatePrototypeDetails", { route: 'v1/updatePrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.updatePrototypeDetails });
 
-app.http("addVersion", { route: 'v1/addVersion', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.addVersion});
+app.http("addVersion", { route: 'v1/addVersion', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.addVersion });
 
-app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.getVersionById  });
+app.http('getVersionById', { route: 'v1/getVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.getVersionById });
 
-app.http('updateVersionById', { route: 'v1/updateVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionById  });
+app.http('updateVersionById', { route: 'v1/updateVersionById', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.updateVersionById });
 
 app.http("fetchPrototypeDetails", { route: 'v1/fetchPrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.fetchPrototypeDetails });
 
@@ -28,3 +28,5 @@ app.http("addManufacturingDetails", { route: 'v1/addManufacturingDetails', metho
 app.http("updateManufacturingDetails", { route: 'v1/updateManufacturingDetails', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.updateManufacturingDetails });
 
 app.http("fetchComponentDetailById", { route: 'v1/fetchComponentDetailById', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.fetchComponentDetailById });
+
+app.http("fetchVersionDetails", { route: 'v1/fetchVersionDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.fetchVersionDetails });
