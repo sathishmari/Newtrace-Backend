@@ -28,3 +28,5 @@ app.http("addManufacturingDetails", { route: 'v1/addManufacturingDetails', metho
 app.http("updateManufacturingDetails", { route: 'v1/updateManufacturingDetails', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.updateManufacturingDetails });
 
 app.http("fetchComponentDetailById", { route: 'v1/fetchComponentDetailById', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.fetchComponentDetailById });
+
+app.http("fetchVersionDetails", { route: 'v1/fetchVersionDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.fetchVersionDetails });
