@@ -11,6 +11,7 @@ const addVersionByDefault = async (request) => {
         return defaultVersion;
     } catch (error) {
         console.log(formatErrorResponse(error));
+        formatErrorResponse(Messages.PROTOTYPE_MASTER.ERROR_IN_CREATING_DEFAULT_VERSION);
     }
 }
 
