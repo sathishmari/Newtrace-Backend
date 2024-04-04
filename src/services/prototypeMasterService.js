@@ -17,8 +17,6 @@ const addPrototypeMaster = async (request) => {
         // return formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS ,  ERROR.UNAUTHORIZED);
         // return { status: `${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, body: request }
     } else {
-        console.log("---------description----", request);
-        console.log("---------description----", request.projectedDesignCompletionDate);
         const data = {
             prototypeName: request.prototypeName,
             description: request.description,
@@ -30,10 +28,10 @@ const addPrototypeMaster = async (request) => {
             updatedTs: await getCurrentTimestamp(),
         };
 
-        let newUser = await prototypeMasterRepository.create(data);
+        let newPrototype = await prototypeMasterRepository.create(data);
 
         const versionData = {
-            prototypeId: request.prototypeName,
+            prototypeId: newPrototype.id,
             projectedDesignCompletionDate: request.projectedDesignCompletionDate,
             projectedAssemblyCompletionDate: request.projectedAssemblyCompletionDate,
             ProjectedTestingCompletionDate: request.ProjectedTestingCompletionDate,
@@ -41,8 +39,8 @@ const addPrototypeMaster = async (request) => {
             updatedTs: await getCurrentTimestamp(),
         }
         let defaultVersion = await prototypeVersionService.addVersionByDefault(versionData);
-        console.log("defaultVersion------------", defaultVersion);
-        return newUser
+        console.log("DefaultVersion :", defaultVersion);
+        return newPrototype
     }
 }
 

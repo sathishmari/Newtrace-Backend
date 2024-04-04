@@ -63,7 +63,8 @@ exports.Messages = {
 
     PROTOTYPE_MASTER : {
         PROTOTYPE_ALREADY_EXISTS: "Prototype name already exists!",
-        VERSION_ALREADY_EXISTS: "version ID already exists!"
+        VERSION_ALREADY_EXISTS: "version ID already exists!",
+        ERROR_IN_CREATING_DEFAULT_VERSION: "Error in generating default version!",
     }
 }
 

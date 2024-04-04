@@ -11,6 +11,7 @@ const addVersionByDefault = async (request) => {
         return defaultVersion;
     } catch (error) {
         console.log(formatErrorResponse(error));
+        formatErrorResponse(Messages.PROTOTYPE_MASTER.ERROR_IN_CREATING_DEFAULT_VERSION);
     }
 }
 
@@ -60,6 +61,7 @@ const updateVersionById = async (request) => {
     const { id } = request;
     console.log(request)
     const versionDetails = await prototypeVersionRepository.getById(id);
+    console.log("versionDetails : ", versionDetails);
     if (!isEmptyObject(versionDetails)) {
         const updateVersion = await prototypeVersionRepository.update({ ...versionDetails, ...request });
         const prototypeDetails = await prototypeMasterRepository.getById(updateVersion?.prototypeId);
