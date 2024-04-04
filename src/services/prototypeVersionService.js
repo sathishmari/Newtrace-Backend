@@ -68,6 +68,7 @@ const updateVersionById = async (request) => {
     const { id } = request;
     console.log(request)
     const versionDetails = await prototypeVersionRepository.getById(id);
+    console.log("versionDetails : ", versionDetails);
     if (!isEmptyObject(versionDetails)) {
         const updateVersion = await prototypeVersionRepository.update({ ...versionDetails, ...request });
         return updateVersion;
