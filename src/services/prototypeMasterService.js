@@ -12,14 +12,16 @@ const addPrototypeMaster = async (request) => {
     console.log("prototypeMaster : ", prototypeMaster);
     if (!isEmptyArray(prototypeMaster)) {
         // return {status : Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS,code  : 401 };
-        throw formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS, ERROR.UNAUTHORIZED);
+        throw formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS, ERROR.UNAUTHORIZED)
         // throw new Error(`${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, ERROR.UNAUTHORIZED);
         // return formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS ,  ERROR.UNAUTHORIZED);
         // return { status: `${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, body: request }
     } else {
+        console.log("---------description----", request);
+        console.log("---------description----", request.projectedDesignCompletionDate);
         const data = {
             prototypeName : request.prototypeName,
-            description : request.description,
+            description :  request.description,
             lcPrototypeName: await makeLcWithoutSpace(request.prototypeName),
             createdBy: null,
             updatedBy: null,
@@ -48,31 +50,19 @@ const fetchPrototypeDetails = async (request) => {
     let allPrototype = await prototypeMasterRepository.getAll();
     if (!isEmptyArray(allPrototype)) {
         let prototypeDetails = await Promise.all(allPrototype.map(async (prototype) => {
-            const versions = await prototypeVersionRepository.getByObject({ prototypeId: prototype.id });
-            prototype.versions = versions.length > 1 ? versions.sort((a, b) => b._ts - a._ts) : versions;
-            return prototype.length > 1 ? prototype.sort((a, b) => b._ts - a._ts) : prototype;
+            prototype.versions = await prototypeVersionRepository.getByObject({ prototypeId: prototype.id });
+            return prototype;
         }))
         return prototypeDetails;
     } else {
         return [];
     }
-}
 
-const updatePrototypeDetails = async (request) => {
-    const { id } = request;
-    const dbPrototypeDetail = await prototypeMasterRepository.getById(id);
-    if (!isEmptyObject(dbPrototypeDetail)) {
-        const prototypeDetails = await prototypeMasterRepository.update({ ...dbPrototypeDetail, ...request });
-        return prototypeDetails;
-    } else {
-        throw formatErrorResponse("Prototype is not found");
-    }
 }
 
 module.exports = {
     ...baseService,
 
     addPrototypeMaster,
-    fetchPrototypeDetails,
-    updatePrototypeDetails
+    fetchPrototypeDetails
 }

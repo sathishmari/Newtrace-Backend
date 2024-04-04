@@ -7,15 +7,7 @@ baseService = baseService(prototypeVersionRepository);
 
 const addVersionByDefault = async (request) => {
     try {
-        const data = {
-            prototypeId: request.prototypeId,
-            versionName: keyWords.DEFAULT_VERSION,
-            versionStatus: prototypeStatus.DESIGN,
-            createdTs: await getCurrentTimestamp(),
-            updatedTs: await getCurrentTimestamp(),
-        };
-
-        let defaultVersion = await prototypeVersionRepository.create(data);
+        let defaultVersion = await prototypeVersionRepository.create({...request ,versionName: keyWords.DEFAULT_VERSION, versionStatus: prototypeStatus.DESIGN,});
         return defaultVersion;
     } catch (error) {
         console.log(formatErrorResponse(error));
@@ -23,7 +15,7 @@ const addVersionByDefault = async (request) => {
 }
 
 const addVersion = async (request) => {
-    console.log("----------------",request)
+    console.log("--------request--------",request)
     try {
         // const data = {
         //     prototypeId: request.prototypeId,
@@ -51,16 +43,17 @@ const addVersion = async (request) => {
 const getVersionById = async (request) => {
     const { id } = request;
     let versionData = await prototypeVersionRepository.getById(id);
+    console.log("=====================",versionData);
     if (!isEmptyObject(versionData)) {
-        const prototypeDetails = await prototypeMasterRepository.getById(versionData.prototypeId);
+        const prototypeDetails = await prototypeMasterRepository.getById(versionData?.prototypeId);
         return {
-            prototypeName: prototypeDetails.prototypeName,
-            prototypeDescription: prototypeDetails.description ? prototypeDetails.description : '',
-            prototypeRemarks: prototypeDetails.remarks,
+            prototypeName: prototypeDetails?.prototypeName,
+            prototypeDescription: prototypeDetails?.description ? prototypeDetails?.description : '',
+            prototypeRemarks: prototypeDetails?.remarks,
             ...versionData
         };
     } else {
-        throw formatErrorResponse("Version is not Found!!");
+        throw formatErrorResponse("Version is not Found!!",401);
     }
 }
 
