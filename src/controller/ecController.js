@@ -7,7 +7,7 @@ const { constant: { Roles } } = require("../constants");
 const { preMiddleware: { preInvoke } } = require("../middleware");
 
 const addEcDetails = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'addEcDetails', request, context);
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
@@ -34,10 +34,25 @@ const fetchEcDetails = async (request, context) => {
     }
 };
 
+const updateEcDetails = async (request, context) => {
+    let { status, body } = await preInvoke(null, null, request, context);
+    if (status !== ERROR.OK) {
+        return formatErrorResponse(status, body)
+    }
+    try {
+        let result = await ecService.updateEcDetails(body);
+        return formatResponse(result);
+    } catch (error) {
+        console.log({ error });
+        return formatErrorResponse(error.body, error.status)
+    }
+};
+
 
 module.exports = {
     ...baseController,
-    
+
     addEcDetails,
-    fetchEcDetails
+    fetchEcDetails,
+    updateEcDetails
 }

@@ -21,6 +21,8 @@ app.http("addEcDetails", { route: 'v1/addEcDetails', methods: ['POST'], authLeve
 
 app.http("fetchEcDetails", { route: 'v1/fetchEcDetails', methods: ['POST'], authLevel: 'anonymous', handler: ecController.fetchEcDetails });
 
+app.http("updateEcDetails", { route: 'v1/updateEcDetails', methods: ['POST'], authLevel: 'anonymous', handler: ecController.updateEcDetails });
+
 app.http("fetchManufacturingDetailsByVersionId", { route: 'v1/fetchManufacturingDetailsByVersionId', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.fetchManufacturingDetailsByVersionId });
 
 app.http("addManufacturingDetails", { route: 'v1/addManufacturingDetails', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.addManufacturingDetails });

@@ -3,9 +3,6 @@ let { baseRepository } = require("./genericRepository");
 
 baseRepository = baseRepository(ecContainer());
 
-
 module.exports = {
-  ...baseRepository, 
-
-  
+  ...baseRepository,
 }
