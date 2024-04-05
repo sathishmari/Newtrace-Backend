@@ -7,7 +7,7 @@ baseService = baseService(prototypeVersionRepository);
 
 const addVersionByDefault = async (request) => {
     try {
-        let defaultVersion = await prototypeVersionRepository.create({...request ,versionName: keyWords.DEFAULT_VERSION, versionStatus: prototypeStatus.DESIGN,});
+        let defaultVersion = await prototypeVersionRepository.create({...request ,versionName: keyWords.DEFAULT_VERSION, versionStatus: prototypeStatus.DESIGN});
         return defaultVersion;
     } catch (error) {
         console.log(formatErrorResponse(error));
@@ -15,20 +15,13 @@ const addVersionByDefault = async (request) => {
 }
 
 const addVersion = async (request) => {
-    console.log("--------request--------",request)
+    console.log("--------request--------",request.prototypeID)
     try {
-        // const data = {
-        //     prototypeId: request.prototypeId,
-        //     versionName: !!request.versionName ? request.versionName : keyWords.DEFAULT_VERSION,
-        //     versionStatus: prototypeStatus.DESIGN,
-        //     createdTs: await getCurrentTimestamp(),
-        //     updatedTs: await getCurrentTimestamp(),
-        // };
-        let oldVersion = await prototypeVersionRepository.getByVersionName(request.versionName, "ve");
+        let oldVersion = await prototypeVersionRepository.getByVersionName(request.versionName, request.prototypeID);
 
         if (isEmptyArray(oldVersion)) {
             // let defaultVersion = await prototypeVersionRepository.create(data);
-            let defaultVersion = await prototypeVersionRepository.create({...request,  prototypeId : "ve", createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp(),});
+            let defaultVersion = await prototypeVersionRepository.create({...request,  prototypeId : request.prototypeID,versionStatus: prototypeStatus.DESIGN, createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp(),});
             return defaultVersion;
         }
         else {

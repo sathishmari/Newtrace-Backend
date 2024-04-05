@@ -10,7 +10,7 @@ const addExperiment = async (request) => {
     try {
         
         // let oldVersion = await experimentRepository.getByVersionName(request.versionName, "ve");
-        let defaultVersion = await experimentRepository.create({...request, createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp()});
+        const defaultVersion = await experimentRepository.create({...request, createdTs:  getCurrentTimestamp(),updatedTs: getCurrentTimestamp()});
         return defaultVersion;
 
         // if (isEmptyArray(oldVersion)) {
@@ -24,10 +24,48 @@ const addExperiment = async (request) => {
     }
 }
 
+const fetchAllExperiments = async (request) =>
+{
+    try {
+        
+        const allExperiments = await experimentRepository.getAll();
+        return allExperiments;
+    } catch (error) {
+        console.log(formatErrorResponse(error));
+    }
+}
+
+const getExperimentById = async (request) =>
+{
+    const { id } = request;
+    let experimentData = await experimentRepository.getById(id);
+    if (!isEmptyObject(experimentData)) {
+        
+        return experimentData;
+    } else {
+        throw formatErrorResponse("Experiment is not Found!!",401);
+    }
+}
+
+const updateExperimentById = async (request) => {
+    const { id } = request;
+    const experimentDetails = await experimentRepository.getById(id);
+    if (!isEmptyObject(experimentDetails)) {
+        const updateVersion = await experimentRepository.update({ ...experimentDetails, ...request });
+        return updateVersion;
+    } else {
+        throw formatErrorResponse("Version is not Found!!");
+    }
+}
+
 
 module.exports = {
     ...baseService,
 
     addExperiment,
+    fetchAllExperiments,
+    getExperimentById,
+    updateExperimentById
+    
 
 }

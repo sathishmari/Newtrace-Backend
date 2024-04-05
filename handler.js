@@ -10,6 +10,12 @@ app.http("addPrototypeMaster", { route: 'v1/addPrototypeMaster', methods: ['POST
 
 app.http("addExperiment", { route: 'v1/addExperiment', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.addExperiment });
 
+app.http("fetchAllExperiments", { route: 'v1/fetchAllExperiments', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.fetchAllExperiments });
+
+app.http('getExperimentById', { route: 'v1/getExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.getExperimentById  });
+
+app.http('updateExperimentById', { route: 'v1/updateExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.updateExperimentById  });
+
 app.http("updatePrototypeDetails", { route: 'v1/updatePrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.updatePrototypeDetails });
 
 app.http("addVersion", { route: 'v1/addVersion', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.addVersion});
