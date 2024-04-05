@@ -26,9 +26,10 @@ const addExperiment = async (request) => {
 
 const fetchAllExperiments = async (request) =>
 {
+    const { versionId} = request;
     try {
         
-        const allExperiments = await experimentRepository.getAll();
+        const allExperiments = await experimentRepository.getByObject({versionId});
         return allExperiments;
     } catch (error) {
         console.log(formatErrorResponse(error));
