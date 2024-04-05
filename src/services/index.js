@@ -5,6 +5,7 @@ const prototypeMasterService = require('./prototypeMasterService')
 const prototypeVersionService = require('./prototypeVersionService');
 const ecService = require('./ecService');
 const manufacturingService = require('./manufacturingService');
+const experimentService = require('./experimentService');
 
 
 module.exports = {
@@ -14,5 +15,6 @@ module.exports = {
     prototypeMasterService,
     prototypeVersionService,
     ecService,
-    manufacturingService
+    manufacturingService,
+    experimentService
 }
