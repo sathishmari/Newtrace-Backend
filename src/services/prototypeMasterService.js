@@ -17,11 +17,9 @@ const addPrototypeMaster = async (request) => {
         // return formatErrorResponse(Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS ,  ERROR.UNAUTHORIZED);
         // return { status: `${Messages.PROTOTYPE_MASTER.PROTOTYPE_ALREADY_EXISTS}`, body: request }
     } else {
-        console.log("---------description----", request);
-        console.log("---------description----", request.projectedDesignCompletionDate);
         const data = {
-            prototypeName : request.prototypeName,
-            description :  request.description,
+            prototypeName: request.prototypeName,
+            description: request.description,
             lcPrototypeName: await makeLcWithoutSpace(request.prototypeName),
             createdBy: null,
             updatedBy: null,
@@ -30,19 +28,19 @@ const addPrototypeMaster = async (request) => {
             updatedTs: await getCurrentTimestamp(),
         };
 
-        let newUser = await prototypeMasterRepository.create(data);
+        let newPrototype = await prototypeMasterRepository.create(data);
 
-        const  versionData = {
-            prototypeId : request.prototypeName,
-            projectedDesignCompletionDate : request.projectedDesignCompletionDate ,
-            projectedAssemblyCompletionDate : request.projectedAssemblyCompletionDate,
-            ProjectedTestingCompletionDate :request.ProjectedTestingCompletionDate ,
+        const versionData = {
+            prototypeId: newPrototype.id,
+            projectedDesignCompletionDate: request.projectedDesignCompletionDate,
+            projectedAssemblyCompletionDate: request.projectedAssemblyCompletionDate,
+            ProjectedTestingCompletionDate: request.ProjectedTestingCompletionDate,
             createdTs: await getCurrentTimestamp(),
             updatedTs: await getCurrentTimestamp(),
         }
         let defaultVersion = await prototypeVersionService.addVersionByDefault(versionData);
-        console.log("defaultVersion------------",defaultVersion);
-        return newUser
+        console.log("DefaultVersion :", defaultVersion);
+        return newPrototype
     }
 }
 
@@ -57,12 +55,23 @@ const fetchPrototypeDetails = async (request) => {
     } else {
         return [];
     }
+}
 
+
+const updatePrototypeDetails = async (request) => {
+    const { id } = request;
+    const prototypeDetails = await prototypeMasterRepository.getById(id);
+    if (!isEmptyObject(prototypeDetails)) {
+        return await prototypeMasterRepository.update({ ...prototypeDetails, ...request });
+    } else {
+        throw formatErrorResponse("ProtoType is not Found!!");
+    }
 }
 
 module.exports = {
     ...baseService,
 
     addPrototypeMaster,
-    fetchPrototypeDetails
+    fetchPrototypeDetails,
+    updatePrototypeDetails
 }

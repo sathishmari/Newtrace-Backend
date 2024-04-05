@@ -51,10 +51,26 @@ const updateVersionById = async (request, context) => {
     }
 };
 
+const fetchVersionDetails = async (request, context) => {
+    let { status, body } = await preInvoke(null, null, request, context);
+    if (status !== ERROR.OK) {
+        return formatErrorResponse(status, body)
+    }
+
+    try {
+        let result = await prototypeVersionService.fetchVersionDetails(body);
+        return formatResponse(result);
+    } catch (error) {
+        console.log({ error });
+        return formatErrorResponse(error.body, error.status)
+    }
+};
+
 module.exports = {
     ...baseController,
 
     addVersion,
     getVersionById,
-    updateVersionById
+    updateVersionById,
+    fetchVersionDetails
 }

@@ -10,9 +10,9 @@ const addManufacturingDetails = async (request) => {
     const { versionId, componentName } = request;
     const manufactureData = await manufacturingRepository.getManufacturingDetailsByVersionId(versionId, componentName);
     if (isEmptyArray(manufactureData)) {
-        return await manufacturingRepository.create(request);
+        return await manufacturingRepository.create({ ...request, createdOn: getCurrentTimestamp(), modifiedOn: getCurrentTimestamp() });
     }
-    throw formatErrorResponse("Component Name is already Exists, Try Other name", 401);
+    throw formatErrorResponse("Component Name is already Exists, Try different name", 401);
 }
 
 const fetchManufacturingDetailsByVersionId = async (request) => {
@@ -35,12 +35,18 @@ const fetchComponentDetailById = async (request) => {
 }
 
 const updateManufacturingDetails = async (request) => {
-    const { id } = request;
-    const manufactureDetails = await manufacturingRepository.getById(id);
-    if (!isEmptyObject(manufactureDetails)) {
-        return await manufacturingRepository.update({ ...manufactureDetails, ...request });
+    const { id, componentName } = request;
+    const isUniquesName = await manufacturingRepository.getByObject({ componentName });
+    const manufactureData = isUniquesName ? isUniquesName.filter((detail) => detail.id != id) : isUniquesName;
+    if (isEmptyArray(manufactureData)) {
+        const manufactureDetails = await manufacturingRepository.getById(id);
+        if (!isEmptyObject(manufactureDetails)) {
+            return await manufacturingRepository.update({ ...manufactureDetails, ...request, modifiedOn: getCurrentTimestamp() });
+        }
+        throw formatErrorResponse("Manufacturing component is not found!", 401)
     }
-    throw formatErrorResponse("Manufacturing component is not found!", 401)
+    throw formatErrorResponse("component name is already exists, Try different name!", 401)
+
 }
 
 
