@@ -2,10 +2,19 @@ const { app } = require('@azure/functions');
 const { prototypeMasterController, userController, blobController, authController, prototypeVersionController, manufacturingController } = require('./src/controller');
 const { util: { ERROR } } = require('./src/helper');
 const ecController = require('./src/controller/ecController');
+const experimentController = require('./src/controller/experimentController');
 
 app.http('welcome', { route: 'v1/welcome', methods: ['GET'], authLevel: 'anonymous', handler: () => ({ status: ERROR.OK, body: "Welcome Rhibhus Infosystems!!!" }) });
 
 app.http("addPrototypeMaster", { route: 'v1/addPrototypeMaster', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.addPrototypeMaster });
+
+app.http("addExperiment", { route: 'v1/addExperiment', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.addExperiment });
+
+app.http("fetchAllExperiments", { route: 'v1/fetchAllExperiments', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.fetchAllExperiments });
+
+app.http('getExperimentById', { route: 'v1/getExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.getExperimentById  });
+
+app.http('updateExperimentById', { route: 'v1/updateExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.updateExperimentById  });
 
 app.http("updatePrototypeDetails", { route: 'v1/updatePrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.updatePrototypeDetails });
 

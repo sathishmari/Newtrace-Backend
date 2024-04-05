@@ -3,6 +3,7 @@ const prototypeMasterContainer = require('./prototypeMasterContainer');
 const prototypeVersionContainer = require('./prototypeVersionContainer');
 const ecContainer = require('./ecContainer');
 const manufacturingContainer = require('./manufacturingContainer');
+const experimentContainer = require('./experimentContainer');
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     ...prototypeMasterContainer,
     ...prototypeVersionContainer,
     ...ecContainer,
-    ...manufacturingContainer
+    ...manufacturingContainer,
+    ...experimentContainer,
 }
