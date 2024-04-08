@@ -16,6 +16,7 @@ const addPrototypeMaster = require('./addPrototypeMaster.validator');
 const addVersion = require('./addVersion.validator');
 const fetchVersion = require('./fetchVersion.validator')
 const updateVersion = require('./updateVersion.validator');
+const updatePrototype =  require('./updatePrototype.validator')
 
 module.exports = {
 
@@ -37,5 +38,6 @@ module.exports = {
     addEcDetails,
     fetchVersion,
     updateVersion,
+    updatePrototype
 
 }
