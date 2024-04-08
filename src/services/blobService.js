@@ -2,10 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 const { util: { formatErrorResponse, ERROR } } = require('../helper');
-const { passportRepository } = require('../repository')
 const { constant: { Messages, permissions } } = require('../constants');
-let { baseService } = require("./genericService");
-baseService = baseService(passportRepository);
 
 const deleteBlob = async (blobName, containerName) => {
 
@@ -26,6 +23,20 @@ const deleteBlob = async (blobName, containerName) => {
         }
     })
 };
+
+const addAttachment = async (fileInfo) => {
+    try {
+        const { fileName, updatedTs } = fileInfo;
+        const Key = `${fileName}`;
+        const url = await createSASUrl(Key, 'test', permissions.WRITE)
+        // await passportRepository.update({ id: passportId, resume: { Key, updatedTs } })
+        console.log({ url, Key })
+        return { url, Key };
+    } catch (error) {
+        return formatErrorResponse(Messages.ERROR_IN_RESUME_UPDATION, ERROR.UNPROCESSABLE_ENTITY);
+    }
+};
+
 
 const getSASUrltoPut = async (fileInfo) => {
     const { fileName, container } = fileInfo;
@@ -66,12 +77,13 @@ const createSASUrl = async (fileName, containerName, permissions) => {
     }
 }
 
-const getSASUrltoAccess = async (fileInfo) => {
+const getSASUrlToAccess = async (fileInfo) => {
     const { fileName, container } = fileInfo;
     let url = await createSASUrl(fileName, container, permissions.READ)
+
     return { url };
 };
-const getSASUrltoAccessPdf = async (fileInfo) => {
+const getSASUrlToAccessPdf = async (fileInfo) => {
     const { fileName, container } = fileInfo;
     let url = await createSASUrl(fileName, container, permissions.READ)
     return { url };
@@ -83,7 +95,7 @@ const deleteBlobFile = async (fileInfo) => {
     return Messages.FILE_DELETED;
 };
 
-const uploadEmployeeProfileUsingBuffer = async (blobName, containerName, bufferData ) => {
+const uploadEmployeeProfileUsingBuffer = async (blobName, containerName, bufferData) => {
     const AZURE_STORAGE_ACCOUNT_NAME = process.env.Azure_Storage_AccountName;
     const AZURE_STORAGE_ACCOUNT_KEY = process.env.Azure_Storage_AccountKey;
 
@@ -91,10 +103,10 @@ const uploadEmployeeProfileUsingBuffer = async (blobName, containerName, bufferD
     const blobServiceClient = new BlobServiceClient(`https://${AZURE_STORAGE_ACCOUNT_NAME}.blob.core.windows.net`, sharedKeyCredential);
     const containerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    
+
     try {
         await blockBlobClient.uploadData(bufferData);
-        return Messages.PDF_UPLOADED; 
+        return Messages.PDF_UPLOADED;
     } catch (error) {
         console.error("Error uploading file:", error.message);
         throw formatErrorResponse(ERROR.EXPECTATION_FAILED, Messages.PDF_UPLOADED_ERROR)
@@ -102,12 +114,13 @@ const uploadEmployeeProfileUsingBuffer = async (blobName, containerName, bufferD
 }
 
 module.exports = {
+    addAttachment,
     createSASUrl,
     deleteBlob,
     getSASUrltoPut,
     getSASUrltoPutPdf,
-    getSASUrltoAccess,
-    getSASUrltoAccessPdf,
+    getSASUrlToAccess,
+    getSASUrlToAccessPdf,
     deleteBlobFile,
     uploadEmployeeProfileUsingBuffer
 }
