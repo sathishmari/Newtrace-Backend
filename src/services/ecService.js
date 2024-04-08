@@ -19,11 +19,12 @@ const addEcDetails = async (request) => {
 
 const updateEcDetails = async (request) => {
     const { id, electroChemId } = request;
+    console.log("-----------------------------------",request);
     const ecDetails = await ecRepository.getById(id);
     if (!isEmptyObject(ecDetails)) {
         // const dbElectroChem = await ecRepository.getByObject({ electroChemId });
         // if (isEmptyArray(dbElectroChem)) {
-        return await ecRepository.update({ ...ecDetails, modifiedOn: getCurrentTimestamp(), ...request });
+        return await ecRepository.update({ ...ecDetails, ...request ,modifiedOn: getCurrentTimestamp()});
         // }
         // throw formatErrorResponse("ElectroChem Id is already present, Try different Id", 400);
     }

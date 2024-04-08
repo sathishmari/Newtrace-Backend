@@ -35,7 +35,7 @@ const fetchEcDetails = async (request, context) => {
 };
 
 const updateEcDetails = async (request, context) => {
-    let { status, body } = await preInvoke(null, null, request, context);
+    let { status, body } = await preInvoke(null, 'updateEcDetails', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
