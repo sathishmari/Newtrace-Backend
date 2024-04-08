@@ -18,10 +18,14 @@ const addEcDetails = async (request) => {
 }
 
 const updateEcDetails = async (request) => {
-    const { id } = request;
+    const { id, electroChemId } = request;
     const ecDetails = await ecRepository.getById(id);
     if (!isEmptyObject(ecDetails)) {
+        // const dbElectroChem = await ecRepository.getByObject({ electroChemId });
+        // if (isEmptyArray(dbElectroChem)) {
         return await ecRepository.update({ ...ecDetails, modifiedOn: getCurrentTimestamp(), ...request });
+        // }
+        // throw formatErrorResponse("ElectroChem Id is already present, Try different Id", 400);
     }
     throw formatErrorResponse("Ec Details is not found", 400);
 }
