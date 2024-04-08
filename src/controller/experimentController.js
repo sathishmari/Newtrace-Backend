@@ -1,19 +1,19 @@
 let { baseController } = require("./genericController");
-const { prototypeVersionService } = require("../services");
-baseController = baseController(prototypeVersionService);
+const { experimentService } = require("../services");
+baseController = baseController(experimentService);
 const { ERROR } = require('../helper/util');
 const { util: { formatErrorResponse, formatResponse } } = require('../helper');
 const { constant: { Roles } } = require("../constants");
 const { preMiddleware: { preInvoke } } = require("../middleware");
 
-const addVersion = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'addVersion', request, context);
+const addExperiment = async (request, context) => {
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
 
     try {
-        let result = await prototypeVersionService.addVersion(body);
+        let result = await experimentService.addExperiment(body);
         return formatResponse(result);
     } catch (error) {
         console.log({ error });
@@ -21,56 +21,61 @@ const addVersion = async (request, context) => {
     }
 };
 
-const getVersionById = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
+const fetchAllExperiments = async (request, context) => {
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
 
     try {
-        let result = await prototypeVersionService.getVersionById(body);
+        let result = await experimentService.fetchAllExperiments(body);
         return formatResponse(result);
     } catch (error) {
         console.log({ error });
         return formatErrorResponse(error.body, error.status)
     }
-};
+}
 
-const updateVersionById = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
+const getExperimentById = async (request, context) => {
+    let { status, body } = await preInvoke(null, null , request, context);
+
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
 
     try {
-        let result = await prototypeVersionService.updateVersionById(body);
+        let result = await experimentService.getExperimentById(body);
+        console.log("-------------------------------------");
+        console.log(result);
         return formatResponse(result);
     } catch (error) {
         console.log({ error });
         return formatErrorResponse(error.body, error.status)
     }
-};
+}
 
-const fetchVersionDetails = async (request, context) => {
-    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
+
+const updateExperimentById = async (request, context) => {
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
 
     try {
-        let result = await prototypeVersionService.fetchVersionDetails(body);
+        let result = await experimentService.updateExperimentById(body);
         return formatResponse(result);
     } catch (error) {
-        console.log({ error });
         return formatErrorResponse(error.body, error.status)
     }
 };
+
+
 
 module.exports = {
     ...baseController,
 
-    addVersion,
-    getVersionById,
-    updateVersionById,
-    fetchVersionDetails
+    addExperiment,
+    fetchAllExperiments,
+    getExperimentById,
+    updateExperimentById
 }

@@ -200,11 +200,16 @@ exports.keyWords = {
     PROTOTYPE_NAME: "prototype name",
     VERSION_NAME: "Version Name",
     VERSION_ID: "Version ID",
-    ECDETAIL_NAME: "Ec name",
+    ECDETAIL_NAME: "EC name",
+    ELECTROCHEM_ID: "ElectroChem Id",
     DEFAULT_VERSION: "Version 1",
     projectedDesignCompletionDate : "projectedDesignCompletionDate",
     projectedAssemblyCompletionDate : "projectedAssemblyCompletionDate" ,
     ProjectedTestingCompletionDate : "ProjectedTestingCompletionDate",
+    ID : "id",
+    APPLICATION : "Application",
+    ELECTRODE_POROSITY : "Electrode Porosity",
+    ELECTRODE_STRUCTURE : "Electrode Structure"
 }
 exports.validNames = {
     INDUSTRY: "Industry",
