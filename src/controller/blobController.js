@@ -1,7 +1,7 @@
 const { preMiddleware: { preInvoke } } = require("../middleware");
 const { auth } = require('../middleware');
 let { baseController } = require('./genericController');
-const { blobService } = require('../services');
+const  blobService  = require('../services/blobService');
 const { ERROR } = require('../helper/util');
 const { passportService } = require('../services')
 const { util: { formatErrorResponse, formatResponse } } = require('../helper');
@@ -83,13 +83,14 @@ const addAttachment = async (request, context) => {
 }
 
 const deleteBlobFile = async (request, context) => {
-    let { status, body } = await preInvoke([Roles.Employer, Roles.Worker], 'deleteBlobFile', request, context);
+    let { status, body } = await preInvoke(null, null, request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
 
     try {
         let { currentUser, ...reqBody } = body;
+        console.log("=====-=---------==========",reqBody);
         let result = await blobService.deleteBlobFile(reqBody);
 
         return formatResponse(result);
