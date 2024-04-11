@@ -35,7 +35,7 @@ const fetchPrototypeDetails = async (request, context) => {
 };
 
 const updatePrototypeDetails = async (request, context) => {
-    let { status, body } = await preInvoke(null, null, request, context);
+    let { status, body } = await preInvoke(null, 'updatePrototype', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }

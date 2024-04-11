@@ -12,9 +12,9 @@ app.http("addExperiment", { route: 'v1/addExperiment', methods: ['POST'], authLe
 
 app.http("fetchAllExperiments", { route: 'v1/fetchAllExperiments', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.fetchAllExperiments });
 
-app.http('getExperimentById', { route: 'v1/getExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.getExperimentById  });
+app.http('getExperimentById', { route: 'v1/getExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.getExperimentById });
 
-app.http('updateExperimentById', { route: 'v1/updateExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.updateExperimentById  });
+app.http('updateExperimentById', { route: 'v1/updateExperimentById', methods: ['POST'], authLevel: 'anonymous', handler: experimentController.updateExperimentById });
 
 app.http("updatePrototypeDetails", { route: 'v1/updatePrototypeDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeMasterController.updatePrototypeDetails });
 
@@ -30,6 +30,8 @@ app.http("addEcDetails", { route: 'v1/addEcDetails', methods: ['POST'], authLeve
 
 app.http("fetchEcDetails", { route: 'v1/fetchEcDetails', methods: ['POST'], authLevel: 'anonymous', handler: ecController.fetchEcDetails });
 
+app.http("updateEcDetails", { route: 'v1/updateEcDetails', methods: ['POST'], authLevel: 'anonymous', handler: ecController.updateEcDetails });
+
 app.http("fetchManufacturingDetailsByVersionId", { route: 'v1/fetchManufacturingDetailsByVersionId', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.fetchManufacturingDetailsByVersionId });
 
 app.http("addManufacturingDetails", { route: 'v1/addManufacturingDetails', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.addManufacturingDetails });
@@ -39,3 +41,9 @@ app.http("updateManufacturingDetails", { route: 'v1/updateManufacturingDetails',
 app.http("fetchComponentDetailById", { route: 'v1/fetchComponentDetailById', methods: ['POST'], authLevel: 'anonymous', handler: manufacturingController.fetchComponentDetailById });
 
 app.http("fetchVersionDetails", { route: 'v1/fetchVersionDetails', methods: ['POST'], authLevel: 'anonymous', handler: prototypeVersionController.fetchVersionDetails });
+
+app.http("addAttachment", { route: 'v1/addAttachment', methods: ['POST'], authLevel: 'anonymous', handler: blobController.addAttachment });
+
+app.http("getSASUrlToAccess", { route: 'v1/getSASUrlToAccess', methods: ['POST'], authLevel: 'anonymous', handler: blobController.getSASUrlToAccess });
+
+app.http("deleteBlob", { route: 'v1/deleteBlob', methods: ['POST'], authLevel: 'anonymous', handler: blobController.deleteBlobFile });

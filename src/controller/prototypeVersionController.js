@@ -7,7 +7,7 @@ const { constant: { Roles } } = require("../constants");
 const { preMiddleware: { preInvoke } } = require("../middleware");
 
 const addVersion = async (request, context) => {
-    let { status, body } = await preInvoke(null, null, request, context);
+    let { status, body } = await preInvoke(null, 'addVersion', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
@@ -52,7 +52,7 @@ const updateVersionById = async (request, context) => {
 };
 
 const fetchVersionDetails = async (request, context) => {
-    let { status, body } = await preInvoke(null, null, request, context);
+    let { status, body } = await preInvoke(null, 'fetchVersion', request, context);
     if (status !== ERROR.OK) {
         return formatErrorResponse(status, body)
     }
