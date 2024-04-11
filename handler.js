@@ -45,3 +45,5 @@ app.http("fetchVersionDetails", { route: 'v1/fetchVersionDetails', methods: ['PO
 app.http("addAttachment", { route: 'v1/addAttachment', methods: ['POST'], authLevel: 'anonymous', handler: blobController.addAttachment });
 
 app.http("getSASUrlToAccess", { route: 'v1/getSASUrlToAccess', methods: ['POST'], authLevel: 'anonymous', handler: blobController.getSASUrlToAccess });
+
+app.http("deleteBlob", { route: 'v1/deleteBlob', methods: ['POST'], authLevel: 'anonymous', handler: blobController.deleteBlobFile });

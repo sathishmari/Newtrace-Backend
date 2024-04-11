@@ -6,7 +6,8 @@ const addVersionSchema = Joi.object({
     prototypeId : Joi.string().required(),
     projectedDesignCompletionDate: Joi.string().required().label(keyWords.projectedDesignCompletionDate),
     projectedAssemblyCompletionDate : Joi.string().required().label(keyWords.projectedAssemblyCompletionDate),
-    ProjectedTestingCompletionDate: Joi.string().required().label(keyWords.ProjectedTestingCompletionDate)
+    ProjectedTestingCompletionDate: Joi.string().required().label(keyWords.ProjectedTestingCompletionDate),
+    remarks : Joi.string()
 });
 
 module.exports = addVersionSchema;
