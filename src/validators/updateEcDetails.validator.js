@@ -22,6 +22,7 @@ const updateEcDetailsSchema = Joi.object({
     platingTime : Joi.string(), 
     density : Joi.string(), 
     cellActivity :  Joi.string(), 
+    attributes : Joi.array(), 
     remarks : Joi.string()
 });
 
