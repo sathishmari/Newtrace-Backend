@@ -209,7 +209,8 @@ exports.keyWords = {
     ID: "id",
     APPLICATION: "Application",
     ELECTRODE_POROSITY: "Electrode Porosity",
-    ELECTRODE_STRUCTURE: "Electrode Structure"
+    ELECTRODE_STRUCTURE: "Electrode Structure",
+    ATTRIBUTES: "attributes"
 }
 exports.validNames = {
     INDUSTRY: "Industry",
