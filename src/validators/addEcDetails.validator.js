@@ -7,6 +7,7 @@ const addEcDetailsSchema = Joi.object({
     electroChemId: Joi.string().required().label(keyWords.ELECTROCHEM_ID),
     electrodePorosity: Joi.string().required().label(keyWords.ELECTRODE_POROSITY),
     electrodeStructure: Joi.string().required().label(keyWords.ELECTRODE_STRUCTURE),
+    attributes : Joi.array().required().label(keyWords.ATTRIBUTES),
     remarks : Joi.string()
 });
 
