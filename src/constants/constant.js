@@ -61,7 +61,7 @@ exports.Messages = {
     INVALID_USER_DATA: "Invalid User Data",
     PDF_CREATE_ERROR: "Error in Pdf creation!",
 
-    PROTOTYPE_MASTER : {
+    PROTOTYPE_MASTER: {
         PROTOTYPE_ALREADY_EXISTS: "Prototype name already exists!",
         VERSION_ALREADY_EXISTS: "version ID already exists!",
         ERROR_IN_CREATING_DEFAULT_VERSION: "Error in generating default version!",
@@ -102,7 +102,7 @@ exports.Roles = {
     None: 0,
     User: 1,
     Admin: 2,
-    SuperAdmin: 4 
+    SuperAdmin: 4
 };
 
 // Constants - Fonts : 
@@ -165,8 +165,8 @@ exports.permissions = {
     READ: 'r'
 }
 exports.keyWords = {
-    FIRST_NAME: "First Name", 
-    LAST_NAME: "Last Name", 
+    FIRST_NAME: "First Name",
+    LAST_NAME: "Last Name",
     EMAIL: "User Email",
     JOB_ID: "Job Id",
     PASSWORD: "User Password",
@@ -177,11 +177,11 @@ exports.keyWords = {
     STATUS: "Status",
     USER_ID: 'User ID',
     SUCCESS: 'success',
-    OTP: "otp", 
-    FILE_NAME: "Filename", 
-    CONTAINER: "container", 
-    USER_STATUS: "User Status", 
-    KEY: "Key", 
+    OTP: "otp",
+    FILE_NAME: "Filename",
+    CONTAINER: "container",
+    USER_STATUS: "User Status",
+    KEY: "Key",
 
     VERIFIED: "verified",
     NOT_VERIFIED: "notVerified",
@@ -193,8 +193,8 @@ exports.keyWords = {
     WEBSITE_ADDRESS: "Website Address",
 
     NAME: "name",
-    ASCENDING: "ascending", 
-    TS: '_ts', 
+    ASCENDING: "ascending",
+    TS: '_ts',
 
     DESCRIPTION: "description",
     PROTOTYPE_NAME: "prototype name",
@@ -203,13 +203,13 @@ exports.keyWords = {
     ECDETAIL_NAME: "EC name",
     ELECTROCHEM_ID: "ElectroChem Id",
     DEFAULT_VERSION: "Version 1",
-    projectedDesignCompletionDate : "projectedDesignCompletionDate",
-    projectedAssemblyCompletionDate : "projectedAssemblyCompletionDate" ,
-    ProjectedTestingCompletionDate : "ProjectedTestingCompletionDate",
-    ID : "id",
-    APPLICATION : "Application",
-    ELECTRODE_POROSITY : "Electrode Porosity",
-    ELECTRODE_STRUCTURE : "Electrode Structure",
+    projectedDesignCompletionDate: "projectedDesignCompletionDate",
+    projectedAssemblyCompletionDate: "projectedAssemblyCompletionDate",
+    ProjectedTestingCompletionDate: "ProjectedTestingCompletionDate",
+    ID: "id",
+    APPLICATION: "Application",
+    ELECTRODE_POROSITY: "Electrode Porosity",
+    ELECTRODE_STRUCTURE: "Electrode Structure",
     ATTRIBUTES: "attributes"
 }
 exports.validNames = {
@@ -218,7 +218,7 @@ exports.validNames = {
 
 exports.prototypeStatus = {
     PLANNED: "Planned",
-    DESIGN: "Design",
+    DESIGN: "design",
     MANUFACTURING: "Manufacturing",
     TESTING: "Testing",
     ARCHIVED: "Archived"
