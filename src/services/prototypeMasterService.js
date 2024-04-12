@@ -35,6 +35,7 @@ const addPrototypeMaster = async (request) => {
             projectedDesignCompletionDate: request.projectedDesignCompletionDate,
             projectedAssemblyCompletionDate: request.projectedAssemblyCompletionDate,
             ProjectedTestingCompletionDate: request.ProjectedTestingCompletionDate,
+            versionStatus: 'design',
             createdTs: await getCurrentTimestamp(),
             updatedTs: await getCurrentTimestamp(),
         }
