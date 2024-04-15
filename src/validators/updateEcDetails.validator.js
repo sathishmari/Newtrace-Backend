@@ -15,6 +15,8 @@ const updateEcDetailsSchema = Joi.object({
     electrodeSurfaceArea: Joi.string(),
     temperature: Joi.string(),
     electrodeThickness: Joi.string(),
+    thickness: Joi.string(),
+    substratePreTreatment :  Joi.string(),
     composition: Joi.string(),
     pH: Joi.string(),
     solution: Joi.string(),
