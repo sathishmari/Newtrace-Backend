@@ -19,7 +19,6 @@ const addEcDetails = async (request) => {
 
 const updateEcDetails = async (request) => {
     const { id, electroChemId } = request;
-    console.log("-----------------------------------",request);
     const ecDetails = await ecRepository.getById(id);
     if (!isEmptyObject(ecDetails)) {
         // const dbElectroChem = await ecRepository.getByObject({ electroChemId });
