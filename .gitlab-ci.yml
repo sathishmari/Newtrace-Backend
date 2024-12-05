@@ -1,0 +1,82 @@
+# # image: mcr.microsoft.com/azure-cli
+# image: node:latest
+
+# dev_job:
+#   stage: deploy
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "dev"'
+#   before_script:
+#     - echo "Before Script in $CI_COMMIT_BRANCH"
+#     - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+#     - npm install -g azure-functions-core-tools@4 --unsafe-perm true
+#     - npm i --legacy-peer-deps
+
+#     - echo $SP_ID
+#     - echo $SP_SECRET
+#     - echo $TENANT_ID
+#     - echo $SUBSCRIPTION_ID
+
+#     - az login --service-principal --username $SP_ID --password $SP_SECRET --tenant $TENANT_ID
+#     - az account set --subscription $SUBSCRIPTION_ID
+#     - ls -la
+#     - set -euo pipefail
+#   script:
+#     - echo "Script in $CI_COMMIT_BRANCH"
+#     - func azure functionapp publish $CI_COMMIT_BRANCH-d-academy-backend
+#   environment:
+#     name: $CI_COMMIT_BRANCH
+# testing_job:
+#   stage: deploy
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "testing"'
+#   before_script:
+#     - echo "Before Script in $CI_COMMIT_BRANCH"
+#     - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+#     - npm install -g azure-functions-core-tools@4 --unsafe-perm true
+#     - npm i --legacy-peer-deps
+#     - az login --service-principal --username $SP_ID --password $SP_SECRET --tenant $TENANT_ID
+#     - az account set --subscription $SUBSCRIPTION_ID
+#     - ls -la
+#     - set -euo pipefail
+#   script:
+#     - echo "Script in $CI_COMMIT_BRANCH"
+#     - func azure functionapp publish $CI_COMMIT_BRANCH-d-academy-backend
+#   environment:
+#     name: $CI_COMMIT_BRANCH
+# uat_job:
+#   stage: deploy
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "uat"'
+#   before_script:
+#     - echo "Before Script in $CI_COMMIT_BRANCH"
+#     - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+#     - npm install -g azure-functions-core-tools@4 --unsafe-perm true
+#     - npm i --legacy-peer-deps
+#     - az login --service-principal --username $SP_ID --password $SP_SECRET --tenant $TENANT_ID
+#     - az account set --subscription $SUBSCRIPTION_ID
+#     - ls -la
+#     - set -euo pipefail
+#   script:
+#     - echo "Script in $CI_COMMIT_BRANCH"
+#     - func azure functionapp publish $CI_COMMIT_BRANCH-d-academy-backend
+#   environment:
+#     name: $CI_COMMIT_BRANCH
+# prod_job:
+#   stage: deploy
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "prod"'
+#   before_script:
+#     - echo "Before Script in $CI_COMMIT_BRANCH"
+#     - curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+#     - npm install -g azure-functions-core-tools@4 --unsafe-perm true
+#     - npm i --legacy-peer-deps
+#     - az login --service-principal --username $SP_ID --password $SP_SECRET --tenant $TENANT_ID
+#     - az account set --subscription $SUBSCRIPTION_ID
+#     - ls -la
+#     - set -euo pipefail
+#   script:
+#     - echo "Script in $CI_COMMIT_BRANCH"
+#     - func azure functionapp publish $CI_COMMIT_BRANCH-d-academy-backend
+#   environment:
+#     name: $CI_COMMIT_BRANCH
+    

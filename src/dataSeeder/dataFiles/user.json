@@ -1,0 +1,12 @@
+[
+    {
+        "firstname": "Bhargavi",
+        "lastname": "Prasad",
+        "email": "Bhargavi.Prasad@rhibhus.com",
+        "password": "ThisNeedToBeCorrected",
+        "type": 7,
+        "otp": 1234,
+        "otp_expirationtime":0,
+        "active": true
+    }
+]
